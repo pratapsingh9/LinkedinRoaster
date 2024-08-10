@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useRouter } from "next/navigation";
+
 export default function HomePage() {
   useEffect(() => {
     const smoothScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -201,96 +202,73 @@ const Pricing = () => {
   return (
     <section className="w-full">
       <h2 className="text-4xl font-bold text-center mb-14">Pricing</h2>
-      <div className="max-w-lg mx-auto bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
-        <div className="px-10 py-12">
-          <h3 className="text-3xl font-semibold text-center mb-8 text-[#343a40]">
-            Beta Launch Special
-          </h3>
-          <div className="flex justify-center items-center mb-10">
-            <span className="text-6xl font-extrabold text-[#ff6b6b]">Free</span>
-            <span className="text-xl text-[#6c757d] ml-3">per roast</span>
-          </div>
-          <ul className="space-y-4 text-[#495057] text-lg">
-            <li className="flex items-center">
-              <svg
-                className="w-6 h-6 text-[#ff6b6b] mr-2"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 13l4 4L19 7"
-                ></path>
-              </svg>
-              Professional LinkedIn roast
-            </li>
-            <li className="flex items-center">
-              <svg
-                className="w-6 h-6 text-[#ff6b6b] mr-2"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 13l4 4L19 7"
-                ></path>
-              </svg>
-              Detailed feedback on profile
-            </li>
-            <li className="flex items-center">
-              <svg
-                className="w-6 h-6 text-[#ff6b6b] mr-2"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 13l4 4L19 7"
-                ></path>
-              </svg>
-              Suggestions for improvement
-            </li>
-            <li className="flex items-center">
-              <svg
-                className="w-6 h-6 text-[#ff6b6b] mr-2"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 13l4 4L19 7"
-                ></path>
-              </svg>
-              Satisfaction guaranteed
-            </li>
-          </ul>
-          <div className="mt-12 text-center">
-            <Link
-              href="#"
-              className="inline-flex h-12 items-center justify-center rounded-md bg-[#ff6b6b] px-10 text-lg font-medium text-white shadow-lg transition-colors duration-300 ease-in-out hover:bg-[#ff4b4b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff6b6b] focus-visible:ring-opacity-50"
-              prefetch={false}
-            >
-              Get Started
-            </Link>
-          </div>
-        </div>
+      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <PricingCard
+          title="Basic Roast"
+          description="Perfect for a quick roast to get you started."
+          price="$ Free"
+          features={[
+            "AI-powered profile analysis",
+            "Humor-filled feedback",
+            "1 revision",
+          ]}
+        />
       </div>
     </section>
+  );
+};
+
+const PricingCard = ({
+  title,
+  description,
+  price,
+  features,
+  isPremium,
+}: any) => {
+  return (
+    <div
+      className={`bg-white shadow-gray-100  rounded-2xl shadow-lg overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105 border border-gray-200`}
+    >
+      <div
+        className={`p-8 
+             bg-gradient-to-br text-black
+             bg-gray-100`}
+      >
+        <h3 className="text-2xl font-bold mb-2">{title}</h3>
+        <p className="text-lg opacity-90 mb-4">{description}</p>
+        <p className="text-4xl font-bold">{price}</p>
+      </div>
+      <div className="p-8">
+        <ul className="space-y-4 mb-8">
+          {features.map((feature: any, index: any) => (
+            <li key={index} className="flex items-center">
+              <svg
+                className="w-5 h-5 mr-3 text-green-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              {feature}
+            </li>
+          ))}
+        </ul>
+        <Link
+          href={"/home"}
+          className={`w-full inline-flex h-12 items-center justify-center rounded-xl  
+              bg-red-500 text-white hover:bg-gray-700
+           px-8 text-lg font-medium shadow transition-colors duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#ff6b6b]`}
+        >
+          Get Started
+        </Link>
+      </div>
+    </div>
   );
 };

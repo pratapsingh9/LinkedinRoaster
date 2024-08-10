@@ -4,7 +4,7 @@ import { Link as ScrollLink } from "react-scroll";
 
 export const CustomNavbar = () => {
   return (
-    <header className="fixed top-0 left-0 right-0 bg-transparent z-50 px-4 lg:px-6 h-16 flex items-center justify-between shadow-sm">
+    <header className="fixed top-0 left-0 right-0 bg-transparent z-50 px-4 lg:px-6 h-16 flex items-center justify-between shadow-sm backdrop-filter backdrop-blur-md">
       <Link
         href="/"
         className="flex items-center justify-center"
